@@ -1,0 +1,6 @@
+.border-top-only {
+  /* border-top: none; */
+  border-left: none;
+  border-right: none;
+  border-bottom: 0 none;
+}

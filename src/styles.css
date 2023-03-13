@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.bg-dark-blue {
+  background-color: #054C7A;
+}
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: #a1aab2 !important;
+}

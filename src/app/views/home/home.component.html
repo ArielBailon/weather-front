@@ -1,27 +1,22 @@
 
-<div class="container">
-
-
-  <h5 class="text-center">Welcome to WeatherApp</h5>
-
-  <div class="card-container">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h5 class="text-center">Please choose:</h5>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <li class="list-group-item">
-            <a href="#" class="">I want to know the weather by day!</a>
-          </li>
-          <li class="list-group-item">
-            <a href="#" class="">I want to know the weather by weeks!</a>
-          </li>
-        </div>
+<div *ngIf="showHome" class="card-container">
+  <div class="card">
+    <div class="card-header bg-dark-blue text-white">
+      <h5 class="text-center">Please choose:</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <li class="list-group-item" (click)="openWeatherApp()">
+          <a href="#" class="">Days Manager</a>
+        </li>
+        <li class="list-group-item" (click)="openWeatherManager()">
+          <a href="#" class="">Weather Manager</a>
+        </li>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- <app-weather [showBy]="'day'"></app-weather> -->
+  <app-weather *ngIf="showWeatherApp" [showBy]="'day'"></app-weather>
+  <app-weather-manager *ngIf="showWeatherManager"></app-weather-manager>
