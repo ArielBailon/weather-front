@@ -4,4 +4,5 @@ export enum ApiPathEnum {
 
 export enum WeatherEnum {
   GetTodaysWeather = "/getTodaysWeather",
+  GetForecast = "/getForecast",
 }

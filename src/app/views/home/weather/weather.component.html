@@ -8,29 +8,31 @@
 >
   <br />
   <br />
-  <p style="color: white">Cargando...</p>
+  <p style="color: white">Loading...</p>
 </ngx-spinner>
 
-<div class="row input-container mt-4 mb-0">
+<div class="row input-container mt-3 mb-0">
   <div class="col-sm-12 col-lg-4 d-flex">
-    <input type="text" (keydown.enter)="getTodaysWeather()" [(ngModel)]="locationName" class="query-input form-control " placeholder="Search by Location Name. Ex: London, New York...">
+    <!-- <input type="text" (keydown.enter)="getTodaysWeather()" [(ngModel)]="locationName" class="query-input form-control " placeholder="Search by Location Name. Ex: London, New York..."> -->
+    <input type="text" [(ngModel)]="locationName" class="query-input form-control " placeholder="Search by Location Name. Ex: London, New York...">
   </div>
 </div>
 
-<div class="row input-container mt-4 mb-4">
+<div class="row input-container mt-3 mb-3">
   <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
-    <button (click)="getTodaysWeather()" class="btn btn-primary" type="button">Search</button>
+    <button [disabled]="locationName ? false : true" (click)="getTodaysWeather()" class="mx-2 btn btn-primary" type="button">Today</button>
+    <button [disabled]="locationName ? false : true" (click)="getForecast()" class="mx-2 btn btn-primary" type="button">Forecast</button>
   </div>
 </div>
 <div class="row card-container">
-  <div class="col-sm-12 col-lg-4 d-flex">
+  <div class="col-sm-12 col-lg-4 d-flex ">
     <div class="border-primary-color card w-100">
       <div class="card-body">
-        <h4 class="card-title text-center">Today's Weather</h4>
+        <h5 class="card-title text-center">Today's Weather</h5>
         <hr />
-        <div class="d-flex align-items-center center-div mt-1 pt-3">
-          <div class="display-5 text-info">
-            <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" />
+        <div class="d-flex align-items-center center-div mt-0 pt-0">
+          <div class="display-6 text-info">
+            <img [src]="imgSrc" alt="" />
             <span
               >{{weather}}
               <sup>°</sup>
@@ -41,83 +43,74 @@
             <small>{{day}}</small>
           </div>
         </div>
-        <table class="table table-borderless mini-table mt-1">
-          <tbody>
+        <table class="table table-borderless mini-table mt-0">
+          <tbody *ngIf="!showDetails">
+            <tr *ngIf="showWind">
+              <td class="text-muted">Wind</td>
+              <td class="font-medium">{{wind}} mph</td>
+            </tr>
+            <tr *ngIf="showHumidity">
+              <td class="text-muted">Humidity</td>
+              <td class="font-medium">{{humidity}}%</td>
+            </tr>
+
+            <tr *ngIf="showPressure">
+              <td class="text-muted">Pressure</td>
+              <td class="font-medium">{{pressure}} hPa</td>
+            </tr>
+            <tr *ngIf="showCloudCover">
+              <td class="text-muted">Cloud Cover</td>
+              <td class="font-medium">{{cloudCover}}%</td>
+            </tr>
+            <tr>
+              <td class="btn" (click)="toggleDetails()">More Details
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+              </td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="showDetails">
             <tr>
               <td class="text-muted">Wind</td>
               <td class="font-medium">{{wind}} mph</td>
+              <td class="text-muted">Rain</td>
+              <td class="font-medium">{{rain}} mm</td>
             </tr>
             <tr>
               <td class="text-muted">Humidity</td>
               <td class="font-medium">{{humidity}}%</td>
+              <td class="text-muted">Snow</td>
+              <td class="font-medium">{{snow}} mm</td>
             </tr>
+
             <tr>
               <td class="text-muted">Pressure</td>
               <td class="font-medium">{{pressure}} hPa</td>
+              <td class="text-muted">Latitude</td>
+              <td class="font-medium">{{lat}}</td>
             </tr>
             <tr>
               <td class="text-muted">Cloud Cover</td>
               <td class="font-medium">{{cloudCover}}%</td>
+              <td class="text-muted">Longitude</td>
+              <td class="font-medium">{{lon}}</td>
             </tr>
-
           </tbody>
         </table>
 
-        <ul class="row justify-content-center list-group list-group-horizontal text-center mt-4 pt-3">
+        <ul class="row justify-content-center list-group list-group-horizontal text-center">
           <hr />
-          <li class="list-group-item col-2 border-top-only">
-            <h4 class="text-info">
-              <!-- <i class="wi wi-day-cloudy"></i> -->
-              <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" />
-            </h4>
-            <span class="d-block text-muted">09:30</span>
-            <h3 class="mt-1">
-              70
+          <li *ngFor="let forecast of forecastArr" class="list-group-item col-2 border-top-only mx-5">
+            <img class="" [src]="forecast.weather.icon.url" alt="" />
+            <span class="d-block text-muted">{{ forecast.dt | date }}</span>
+            <span class="d-block text-muted">{{ forecast.weather.description | titlecase }}</span>
+            <h4 class="mt-1">
+              {{forecast.weather.temp.cur}}
               <sup>°</sup>
-            </h3>
-          </li>
-          <li class="list-group-item col-2 border-top-only">
-            <h4 class="text-info">
-              <i class="wi wi-day-cloudy"></i>
             </h4>
-            <span class="d-block text-muted">11:30</span>
-            <h3 class="mt-1">
-              72
-              <sup>°</sup>
-            </h3>
           </li>
-          <li class="list-group-item col-2 border-top-only">
-            <h4 class="text-info">
-              <i class="wi wi-day-hail"></i>
-            </h4>
-            <span class="d-block text-muted">13:30</span>
-            <h3 class="mt-1">
-              75
-              <sup>°</sup>
-            </h3>
-          </li>
-          <li class="list-group-item col-2 border-top-only">
-            <h4 class="text-info">
-              <i class="wi wi-day-sprinkle"></i>
-            </h4>
-            <span class="d-block text-muted">15:30</span>
-            <h3 class="mt-1">
-              76
-              <sup>°</sup>
-            </h3>
-          </li>
-
-          <li class="list-group-item col-2 border-top-only">
-            <h4 class="text-info">
-              <i class="wi wi-day-sprinkle"></i>
-            </h4>
-            <span class="d-block text-muted">15:30</span>
-            <h3 class="mt-1">
-              76
-              <sup>°</sup>
-            </h3>
-          </li>
-
         </ul>
       </div>
     </div>

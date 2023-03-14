@@ -1,16 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark-blue">
+  <a class="navbar-brand mx-5 nav-pointer" (click)="openSection(1)">Weather APP</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav nav-pointer">
+      <a class="nav-item nav-link" [class.active]="showHome ? true : false" (click)="openSection(1)">Home</a>
+      <a class="nav-item nav-link" [class.active]="showWeatherApp ? true : false" (click)="openSection(2)">Day's Manager</a>
+      <a class="nav-item nav-link" [class.active]="showWeatherManager ? true : false" (click)="openSection(3)">Weather Manager</a>
+    </div>
+  </div>
+</nav>
 
-<div *ngIf="showHome" class="card-container">
+<div *ngIf="showHome" class="card-container mt-3">
   <div class="card">
     <div class="card-header bg-dark-blue text-white">
       <h5 class="text-center">Please choose:</h5>
     </div>
     <div class="card-body">
-      <div class="row">
-        <li class="list-group-item" (click)="openWeatherApp()">
-          <a href="#" class="">Days Manager</a>
+      <div class="row nav-pointer text-center">
+        <li class="list-group-item mt-0" (click)="openSection(2)">
+          <a class="">Days Manager
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </a>
         </li>
-        <li class="list-group-item" (click)="openWeatherManager()">
-          <a href="#" class="">Weather Manager</a>
+        <li class="list-group-item" (click)="openSection(3)">
+          <a class="">Weather Manager
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </a>
         </li>
       </div>
     </div>
@@ -18,5 +39,5 @@
 </div>
 
 
-  <app-weather *ngIf="showWeatherApp" [showBy]="'day'"></app-weather>
-  <app-weather-manager *ngIf="showWeatherManager"></app-weather-manager>
+<app-weather *ngIf="showWeatherApp"></app-weather>
+<app-weather-manager *ngIf="showWeatherManager"></app-weather-manager>

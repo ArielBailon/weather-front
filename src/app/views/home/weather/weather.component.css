@@ -11,10 +11,6 @@
   align-items: center;
 }
 
-.border-primary-color {
-  border-color: #5b87b2 !important;
-}
-
 .input-container {
   justify-content: center;
   align-items: center;
@@ -28,3 +24,11 @@
   outline: none;
 }
 
+.fixed-width{
+  width: fit-content;
+}
+
+li {
+	white-space: nowrap;
+	padding: 0 10px;
+}

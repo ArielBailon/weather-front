@@ -6,22 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  showWeatherApp: boolean = true;
-  showWeatherManager: boolean = false;
-  showHome: boolean = false;
+  showHome: boolean = true; // 1
+  showWeatherApp: boolean = false; // 2
+  showWeatherManager: boolean = false; // 3
 
-  openWeatherApp(){
-    this.showWeatherApp = true;
+  // Opens section of each component
+  openSection(sectionNumber: number){
+    this.showWeatherApp = false;
     this.showWeatherManager = false;
     this.showHome = false;
-
-  }
-
-  openWeatherManager(){
-    this.showWeatherManager = true;
-    this.showWeatherApp = false;
-    this.showHome = false;
-
+    if (sectionNumber === 1) this.showHome = true;
+    if (sectionNumber === 2) this.showWeatherApp = true;
+    if (sectionNumber === 3) this.showWeatherManager = true;
   }
 
 }

@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .bg-dark-blue {
@@ -13,3 +14,8 @@
   --bs-text-opacity: 1;
   color: #a1aab2 !important;
 }
+
+.border-primary-color {
+  border-color: #5b87b2 !important;
+}
+

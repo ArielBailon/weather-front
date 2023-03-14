@@ -1,1 +1,48 @@
-<p>weather-manager works!</p>
+<div class="row card-container mt-5">
+  <div class="col-sm-12 col-lg-4 d-flex">
+    <div class="border-primary-color card w-100">
+      <div class="card-body">
+        <h5 class="card-title text-center">Weather Manager</h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center">Check or uncheck the properties you want to see when searching for today's weather.</h6>
+        <hr />
+
+        <table class="table table-borderless mini-table mt-0">
+          <tbody>
+            <tr>
+              <td class="text-muted">
+                <input class="form-check-input" (click)="setShowValue('wind')" type="checkbox" value="" [checked]="showWind">
+                <label class="mx-1 form-check-label" for="flexCheckChecked">
+                  Wind
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted">
+                <input class="form-check-input" (click)="setShowValue('humidity')" type="checkbox" value="" [checked]="showHumidity">
+                <label class="mx-1 form-check-label" for="flexCheckChecked">
+                  Humidity
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted">
+                <input class="form-check-input" (click)="setShowValue('pressure')" type="checkbox" value="" [checked]="showPressure">
+                <label class="mx-1 form-check-label" for="flexCheckChecked">
+                  Pressure
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted">
+                <input class="form-check-input" (click)="setShowValue('cloudCover')" type="checkbox" value="" [checked]="showCloudCover">
+                <label class="mx-1 form-check-label" for="flexCheckChecked">
+                  Cloud Cover
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
