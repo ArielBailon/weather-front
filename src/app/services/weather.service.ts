@@ -14,7 +14,7 @@ export class WeatherService {
   constructor(private _http: HttpClient) {
   }
 
-  getTodaysWeather = (locationName: string): Observable<IGenericBasicResponse<any>> => {
+  getTodaysWeather = (locationName: string | undefined): Observable<IGenericBasicResponse<any>> => {
     const $URL = `${API_URL}${ApiPathEnum.Weather}${WeatherEnum.GetTodaysWeather}`
     return this._http.post<IGenericBasicResponse<any>>($URL, { locationName })
   }

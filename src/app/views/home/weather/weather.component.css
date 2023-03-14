@@ -1,6 +1,30 @@
 .border-top-only {
-  /* border-top: none; */
+  border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: 0 none;
 }
+
+.center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border-primary-color {
+  border-color: #5b87b2 !important;
+}
+
+.input-container {
+  justify-content: center;
+  align-items: center;
+}
+
+.query-input {
+  border: none;
+  border-radius: 0%;
+  border-bottom: 1px solid #1890ff;
+  padding: 5px 10px;
+  outline: none;
+}
+
